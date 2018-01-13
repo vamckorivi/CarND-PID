@@ -1,5 +1,23 @@
 # CarND-Controls-PID
-Self-Driving Car Engineer Nanodegree Program
+Self-Driving Car Engineer Nanodegree Program - PID Control Project
+
+# Objective
+Objective of this project to Use PID Controllers to drive the car around the track in the simulator environment. CTE(Cross Track Error) is read from the simulator using websocket and is used to calculate the steering angle for the next step.
+
+Here is the demo of the project after fine tuning the parameters- Kp(tau_p), Kd(tau_d), Ki(tau_i).
+https://youtu.be/csj3Rmjs7hs
+
+# Parameters and Fine Tuning
+PID - Proportional, Integral, Derivative Controller is used in this project to predict the steering angle of the car and to keep it on the track.
+P- Proportional - Proportional control is to keep the steering angle in proportion to Cross Track Error. But this P Controller alone causes overshoots and causes oscillating driving experience.
+D - Derivate - Derivate Control is used to reduce the oscillations drive of the car using the time derivative of the cross track error. If there is a system bias(steerig drift example), PD controller fails.
+I - Integral - Integral control uses the sum of the cross track error. 
+
+Final Parameters for PID for Steering are- P:0.0135, I-0.0025, D-3.05
+
+I have tried using twiddle algorithm by setting the intial values as 0,0,0 and throtlle is kept constant for this project. With twiddle, for some reason the car was not able to make much progress. So, I have to manually adjust the parameters starting with Udacity values, playing with the P value and keeping the I and D constant and then D value and very small changes for I value was enough to get the car complete the track.
+
+For now, manual tuning of the parameters did work and let the car run on the track. As I have the whole track to test, manual tuning worked out but in real time scneario the tuning should be done on the fly and I will be implementing twiddle/SGD to automatically tune the parameters and see how it works. Also, I need to work on tuning throttle using PID.
 
 ---
 
